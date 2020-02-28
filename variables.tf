@@ -59,7 +59,6 @@ variable "ssl_enforcement" {
 }
 
 variable "whitelist_ips" {
-  type        = string
   description = "List of ips to whitelist."
 }
 
