@@ -24,16 +24,16 @@ resource "azurerm_postgresql_server" "postgresql_server" {
 }
 
 resource "random_string" "random" {
-  for_each = tolist(var.whitelist_ips)
+  for_each = var.whitelist_ips
   length = 8
   special = false
 }
 
 resource "azurerm_postgresql_firewall_rule" "app-server" {
-  for_each = tolist(var.whitelist_ips)
+  for_each = var.whitelist_ips
   name                = "${var.azure_postgresql_server_name}-${random_string.random[each.key].result}"
   resource_group_name = azurerm_resource_group.azure_postgresql_server.name
   server_name         = azurerm_postgresql_server.postgresql_server.name
-  start_ip_address    = tostring(each.value)
-  end_ip_address      = tostring(each.value)
+  start_ip_address    = each.value
+  end_ip_address      = each.value
 }
