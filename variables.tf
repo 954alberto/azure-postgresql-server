@@ -15,7 +15,7 @@ variable "azure_postgresql_server_name" {
 
 variable "sku_name" {
   type        = string
-  description = "The name of the resource group to create for the PostgreSQL server."
+  description = "Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. B_Gen4_1, GP_Gen5_8)."
 }
 
 variable "storage_mb" {
@@ -56,6 +56,11 @@ variable "pg_version" {
 variable "ssl_enforcement" {
   type        = string
   description = "Enables or disables SSL enforcement."
+}
+
+variable "whitelist_ips" {
+  type        = string
+  description = "List of ips to whitelist."
 }
 
 variable "CLIENT_ID" {}
