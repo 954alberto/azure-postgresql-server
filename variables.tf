@@ -57,3 +57,8 @@ variable "ssl_enforcement" {
   type        = string
   description = "Enables or disables SSL enforcement."
 }
+
+variable "CLIENT_ID" {}
+variable "CLIENT_SECRET" {}
+variable "TENANT_ID" {}
+variable "SUBSCRIPTION_ID" {}
