@@ -29,7 +29,7 @@ resource "random_uuid" "uuid" {
 
 resource "azurerm_postgresql_firewall_rule" "app-server" {
   for_each = toset(var.whitelist_ips)
-  name                = random_uuid.uuid[each.key].result}
+  name                = random_uuid.uuid[each.key].result
   resource_group_name = azurerm_resource_group.azure_postgresql_server.name
   server_name         = azurerm_postgresql_server.postgresql_server.name
   start_ip_address    = tostring(each.value)
