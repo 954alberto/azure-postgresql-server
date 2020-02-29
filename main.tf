@@ -23,15 +23,13 @@ resource "azurerm_postgresql_server" "postgresql_server" {
   ssl_enforcement              = var.ssl_enforcement
 }
 
-resource "random_string" "random" {
+resource "random_uuid" "uuid" { 
   for_each = toset(var.whitelist_ips)
-  length = 8
-  special = false
 }
 
 resource "azurerm_postgresql_firewall_rule" "app-server" {
   for_each = toset(var.whitelist_ips)
-  name                = "${var.azure_postgresql_server_name}-${random_string.random[each.key].result}"
+  name                = random_uuid.uuid[each.key].result}
   resource_group_name = azurerm_resource_group.azure_postgresql_server.name
   server_name         = azurerm_postgresql_server.postgresql_server.name
   start_ip_address    = tostring(each.value)
